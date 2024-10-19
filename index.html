@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Required Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO Meta Tags -->
+  <title>Calculadora de Talla de Sujetador y Guía</title>
+  <meta name="description" content="Utiliza nuestra calculadora de talla de sujetador precisa y guía completa para encontrar tu ajuste perfecto. Aprende sobre la talla de sujetador, problemas comunes de ajuste y tablas de conversión para varios países.">
+  <meta name="keywords" content="calculadora de talla de sujetador, guía de tallas de sujetador, medidas precisas de sujetador, ajuste de sujetador, conversión de tallas de sujetador, consejos de ajuste de sujetador, preguntas frecuentes sobre tallas de sujetador">
+
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:title" content="Calculadora de Talla de Sujetador y Guía">
+  <meta property="og:description" content="Utiliza nuestra calculadora de talla de sujetador precisa y guía completa para encontrar tu ajuste perfecto. Aprende sobre la talla de sujetador, problemas comunes de ajuste y tablas de conversión para varios países.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aicalculator.github.io/calculadora-tallas-sujetador/">
+  <meta property="og:image" content="https://aicalculator.github.io/calculadora-tallas-sujetador/images/og-image.jpg">
+
+  <!-- Schema.org Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Calculadora de Talla de Sujetador y Guía",
+    "description": "Utiliza nuestra calculadora de talla de sujetador precisa y guía completa para encontrar tu ajuste perfecto. Aprende sobre la talla de sujetador, problemas comunes de ajuste y tablas de conversión para varios países.",
+    "url": "https://aicalculator.github.io/calculadora-tallas-sujetador/",
+    "mainEntity": {
+      "@type": "WebApplication",
+      "name": "Calculadora de Talla de Sujetador",
+      "description": "Una herramienta precisa para determinar tu talla de sujetador basada en tus medidas.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requiere JavaScript."
+    }
+  }
+  </script>
+
+  <!-- Tippy.js CSS for Tooltips -->
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+
+  <!-- Link to External CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <h1>Calculadora de Talla de Sujetador</h1>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Bra Size Calculator Tool -->
+    <div class="calculator-container">
+      <form id="bra-size-form" aria-labelledby="form-title">
+        <h2 id="form-title" class="visually-hidden">Calcula tu Talla de Sujetador</h2>
+
+        <!-- Unit Selector -->
+        <div class="input-group">
+          <div class="input-row">
+            <label for="unit-selector">Unidad</label>
+            <select id="unit-selector" name="unit" required aria-required="true">
+              <option value="cm">Centímetros (cm)</option>
+              <option value="in">Pulgadas (in)</option>
+            </select>
+            <!-- Tooltip Button -->
+            <button type="button" class="tooltip-button" aria-label="Selecciona tu unidad de medida preferida.">
+              ℹ️
+            </button>
+          </div>
+          <div class="error-message" id="unit-error" aria-live="polite"></div>
+        </div>
+
+        <!-- Band Size Input -->
+        <div class="input-group">
+          <div class="input-row">
+            <label for="band-size">Talla de Banda</label>
+            <input type="number" id="band-size" name="bandSize" placeholder="e.g., 75" required aria-required="true" aria-describedby="band-size-desc" />
+            <!-- Tooltip Button -->
+            <button type="button" class="tooltip-button" aria-label="Mide alrededor de la caja torácica justo debajo del busto. Usa números pares.">
+              ℹ️
+            </button>
+          </div>
+          <div class="error-message" id="band-size-error" aria-live="polite"></div>
+        </div>
+
+        <!-- Bust Size Input -->
+        <div class="input-group">
+          <div class="input-row">
+            <label for="bust-size">Talla de Bust</label>
+            <input type="number" id="bust-size" name="bustSize" placeholder="e.g., 95" required aria-required="true" aria-describedby="bust-size-desc" />
+            <!-- Tooltip Button -->
+            <button type="button" class="tooltip-button" aria-label="Mide alrededor de la parte más llena de tu busto.">
+              ℹ️
+            </button>
+          </div>
+          <div class="error-message" id="bust-size-error" aria-live="polite"></div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="calculate-button" aria-label="Calcular tu talla de sujetador">Calcular Talla</button>
+      </form>
+
+      <!-- Result Display -->
+      <div id="result" class="result-card hidden" role="dialog" aria-modal="true" aria-labelledby="result-title">
+        <h2 id="result-title">Tu Talla de Sujetador</h2>
+        <p id="bra-size-result"></p>
+        <button id="close-result" class="close-button" aria-label="Cerrar resultado">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- Bra Size Information and FAQ Section -->
+    <section id="bra-size-info" class="bra-size-info">
+      <div class="container">
+        <!-- Introduction -->
+        <div class="intro">
+          <h2>Calculadora de Talla de Sujetador y Guía Completa</h2>
+          <p>Bienvenido a nuestra guía completa sobre la talla de sujetador. Ya sea que estés comprando por primera vez o buscando refinar tu ajuste, entender las tallas de sujetador es esencial para la comodidad, el soporte y la confianza.</p>
+        </div>
+
+        <!-- Understanding Bra Sizing -->
+        <div class="section">
+          <h3>Comprendiendo la Talla de Sujetador</h3>
+          <p>La talla de sujetador puede ser confusa debido a las variaciones entre marcas y estilos. Un tamaño adecuado garantiza que tu sujetador ofrezca el soporte necesario y realce tu forma natural.</p>
+        </div>
+
+        <!-- Why Bra Sizing Matters -->
+        <div class="section">
+          <h3>Por Qué Importa la Talla de Sujetador</h3>
+          <ul>
+            <li><strong>Comodidad y Soporte:</strong> Un sujetador bien ajustado puede mejorar la postura y prevenir molestias.</li>
+            <li><strong>Confianza:</strong> Un tamaño adecuado aumenta la confianza al asegurar que tu sujetador se ajuste perfectamente bajo tu ropa.</li>
+            <li><strong>Salud:</strong> Un tamaño incorrecto puede llevar a problemas como dolor de espalda y mala postura.</li>
+          </ul>
+        </div>
+
+        <!-- Common Issues with Bra Fit -->
+        <div class="section">
+          <h3>Problemas Comunes con el Ajuste del Sujetador</h3>
+          <p>¿Sabías que el 70-85% de las mujeres usan sujetadores mal ajustados? Errores comunes incluyen elegir una banda demasiado grande o una copa demasiado pequeña.</p>
+          <ul>
+            <li><strong>Talla de Banda Incorrecta:</strong> Las bandas demasiado grandes pueden hacer que el sujetador se deslice, mientras que las bandas demasiado ajustadas pueden cortar la piel.</li>
+            <li><strong>Talla de Copa Inadecuada:</strong> Las copas demasiado pequeñas pueden causar desbordamiento, mientras que las copas demasiado grandes pueden lucir voluminosas.</li>
+            <li><strong>Falta de Estandarización:</strong> Las variaciones en los estándares de talla entre marcas dificultan encontrar un ajuste preciso.</li>
+          </ul>
+          <p>Señales de un sujetador mal ajustado incluyen bandas que cortan tu torso, marcas rojas visibles, dolor en los hombros o cuello, y molestias durante las actividades diarias.</p>
+        </div>
+
+        <!-- Measuring and Calculating Your Bra Size -->
+        <div class="section">
+          <h3>Medición y Cálculo de Tu Talla de Sujetador</h3>
+          
+          <!-- Preparation for Measurement -->
+          <div class="sub-section">
+            <h4>Preparación para la Medición</h4>
+            <ul>
+              <li>Asegúrate de que la cinta métrica esté nivelada y recta alrededor de tu cuerpo.</li>
+              <li>Tómate tu tiempo para garantizar mediciones precisas.</li>
+              <li>Utiliza una cinta métrica flexible para un ajuste cómodo.</li>
+              <li>Consulta nuestra tabla de tallas de copa para tamaños correspondientes.</li>
+            </ul>
+          </div>
+
+          <!-- Measure Your Band Size -->
+          <div class="sub-section">
+            <h4>Medir Tu Talla de Banda</h4>
+            <ol>
+              <li>Envuelve la cinta métrica firmemente alrededor de tu caja torácica, directamente debajo de tu busto.</li>
+              <li>Asegúrate de que la cinta esté nivelada y recta alrededor de tu cuerpo.</li>
+              <li>Redondea tu medida al número entero más cercano si cae entre dos números.</li>
+            </ol>
+          </div>
+
+          <!-- Measure Your Bust Size -->
+          <div class="sub-section">
+            <h4>Medir Tu Talla de Bust</h4>
+            <ol>
+              <li>Envuelve la cinta métrica alrededor de la parte más llena de tu busto.</li>
+              <li>Asegúrate de que la cinta esté paralela al suelo y no demasiado apretada ni demasiado suelta.</li>
+              <li>Redondea tu medida al número entero más cercano si cae entre dos valores.</li>
+            </ol>
+          </div>
+
+          <!-- Determine Your Cup Size -->
+          <div class="sub-section">
+            <h4>Determinar Tu Talla de Copa</h4>
+            <ol>
+              <li>Resta tu talla de banda de tu talla de busto para determinar tu talla de copa.</li>
+              <li>Cada pulgada de diferencia típicamente corresponde a una talla de copa.</li>
+              <li>Consulta nuestra tabla de tallas de copa para tamaños correspondientes.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Bra Size Conversion Charts -->
+        <div class="section">
+          <h3>Tablas de Conversión de Tallas de Sujetador</h3>
+          <div class="conversion-chart">
+            <h4>Convertir Tus Tallas de Sujetador Entre Diferentes Países</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>País</th>
+                  <th>Talla de Banda</th>
+                  <th>Talla de Copa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Estados Unidos</td>
+                  <td>30, 32, 34, 36, 38, 40, 42</td>
+                  <td>A, B, C, D, DD/E, F, G</td>
+                </tr>
+                <tr>
+                  <td>Reino Unido</td>
+                  <td>28, 30, 32, 34, 36, 38, 40</td>
+                  <td>A, B, C, D, DD, E, F, G</td>
+                </tr>
+                <tr>
+                  <td>Europa</td>
+                  <td>65, 70, 75, 80, 85, 90, 95</td>
+                  <td>A, B, C, D, E, F, G</td>
+                </tr>
+                <tr>
+                  <td>Australia</td>
+                  <td>28, 30, 32, 34, 36, 38, 40</td>
+                  <td>A, B, C, D, DD, E, F</td>
+                </tr>
+                <tr>
+                  <td>Italia</td>
+                  <td>65, 70, 75, 80, 85, 90, 95</td>
+                  <td>A, B, C, D, E, F, G</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Finding the Perfect Fitting Bra -->
+        <div class="section">
+          <h3>Encontrar el Sujetador Perfecto</h3>
+          
+          <!-- Tips for Trying on Bras for Fit -->
+          <div class="sub-section">
+            <h4>Consejos para Probar Sujetadores</h4>
+            <ul>
+              <li>Prueba diferentes sujetadores en tu talla calculada para verificar comodidad y soporte.</li>
+              <li>Recuerda que la talla de sujetador puede variar ligeramente entre diferentes marcas y estilos.</li>
+              <li>Ajusta tu talla de sujetador según sea necesario para un ajuste cómodo.</li>
+            </ul>
+          </div>
+
+          <!-- How to Know When You’ve Found the Perfect Bra Size -->
+          <div class="sub-section">
+            <h4>Cómo Saber si Has Encontrado Tu Talla Perfecta</h4>
+            <ul>
+              <li>Sentirás elevación y soporte, sin dolor.</li>
+              <li>Tus pechos estarán en la posición deseada y lucirán como quieres que se vean.</li>
+              <li>Te sentirás contenida, cómoda, confiada y en control de tu día.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Troubleshooting and Support -->
+        <div class="section">
+          <h3>Solución de Problemas y Soporte</h3>
+          <p>Si estás experimentando problemas con el ajuste de tu sujetador, consulta nuestras preguntas frecuentes a continuación para encontrar soluciones y mejorar tu experiencia de ajuste.</p>
+        </div>
+
+        <!-- Bra Fit FAQs -->
+        <div class="section">
+          <h3>Preguntas Frecuentes sobre el Ajuste del Sujetador</h3>
+          <div class="faq">
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">¿Cómo funcionan las tallas de sujetador?</button>
+              <div class="faq-answer" aria-hidden="true">
+                <p>Las tallas de sujetador se determinan midiendo la circunferencia alrededor de tu caja torácica (talla de banda) y la parte más llena de tu busto (talla de copa). La diferencia entre estas medidas determina tu talla de copa.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">¿Cómo debe ajustarse un sujetador?</button>
+              <div class="faq-answer" aria-hidden="true">
+                <p>Un sujetador bien ajustado debe quedar nivelado en tus hombros, tener una banda ajustada que no se deslice y copas que contengan completamente tu busto sin derrames ni aberturas.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">¿Cómo debe ajustarse una copa de sujetador?</button>
+              <div class="faq-answer" aria-hidden="true">
+                <p>Las copas del sujetador deben encerrar completamente tus pechos sin derrames. No debe haber huecos ni bultos, y la tela debe quedar plana contra tu piel.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">¿Cuántos sujetadores debo tener?</button>
+              <div class="faq-answer" aria-hidden="true">
+                <p>Se recomienda tener al menos tres sujetadores: uno para uso diario, uno para ocasiones especiales y uno deportivo para días activos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="section">
+          <h3>Conclusión</h3>
+          <p>Encontrar tu talla de sujetador perfecta nunca ha sido tan fácil. Utiliza nuestra calculadora de talla de sujetador para determinar tu ajuste ideal desde la comodidad de tu hogar con solo una cinta métrica y un espejo. Sigue nuestra guía paso a paso y consulta nuestras detalladas tablas de conversión para obtener medidas precisas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SVG Illustration (Optional) -->
+    <div class="svg-illustration" aria-hidden="true">
+      <img src="images/bra-illustration.svg" alt="Ilustración de Sujetador" />
+    </div>
+  </main>
+
+  <!-- JavaScript Files -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <script src="script.js"></script>
+</body>
+</html>
